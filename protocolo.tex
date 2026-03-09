@@ -1,0 +1,215 @@
+\documentclass[12pt]{article}
+
+% Tipografiado y preferencias regionales
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-noindentfirst]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{csquotes,textcomp,microtype}
+\usepackage{hyphenat}
+\decimalpoint
+\unaccentedoperators
+
+% Matemáticas
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{bbm}
+\allowdisplaybreaks
+
+% Formato
+\usepackage[margin=3cm]{geometry}
+\usepackage{enumerate}
+
+% Enlaces
+\usepackage[pdftex]{hyperref}
+\usepackage[spanish]{cleveref}
+
+% Bibliografía
+\usepackage[style=authoryear]{biblatex}
+\addbibresource{protocolo.bib}
+
+
+\begin{document}
+	
+	
+	\hyphenation{}
+	
+	\title{Evaluación de estrategias de fusión de rangos ---\textit{rank fusion}--- en la recuperación de información en español: un análisis sobre el conjunto de datos \textsc{MessIRve}}
+	
+	\author{Jorge Esteban Mendoza Ortiz}
+	\date{}
+	
+	\maketitle
+	
+	\section{Introducción}\label{sec:introduccion}
+	
+	\noindent La recuperación de información (IR por sus siglas en inglés) constituye uno de los problemas fundamentales en la ciencia de datos y computación matemática modernas, siendo la base de sistemas críticos que van desde motores de búsqueda comerciales hasta los sistemas de Generación Aumentada por Recuperación (RAG por sus siglas en inglés). El problema de IR, como lo planteamos aquí, consiste en obtener un subconjunto relevante de documentos de un corpus más grande dada una consulta expresada en lenguaje natural. Históricamente este problema se ha abordado utilizando modelos probabilísticos y de coincidencia léxica, con el algoritmo BM25 estableciéndose actualmente como un estándar. No obstante, dado que estos modelos requieren coincidencia exacta entre los términos de las consultas y los documentos, a menudo fallan en capturar relaciones semánticas y contextuales. Esta limitación se acentúa en lenguas morfológicamente ricas como el español, en el que fenómenos como la flexión verbal, derivación y variaciones de género y número generan múltiples formas para un mismo lema, reduciendo la probabilidad de coincidencia exacta de términos.
+	
+	El aprendizaje profundo y los modelos de lenguaje basados en la arquitectura \textit{Transformer} han revolucionado el campo del procesamiento de lenguaje natural, introduciendo técnicas que permiten utilizar representaciones vectoriales del texto en las que la similitud semántica se cuantifica mediante distancias geométricas. A pesar del éxito de estos modelos ---que conocemos como ``semánticos''--- en numerosas tareas, estos tienen sus propias limitaciones y fallas: tienden a perder precisión ante términos exactos o nombres propios poco frecuentes, áreas en las que los modelos léxicos tradicionales siguen siendo superiores. Esto sugiere que los modelos léxicos y semáticos no son sustitutos ni redundantes, sino complementarios.
+	
+	En el contexto de la lengua española, la investigación en IR ha estado históricamente rezagada en comparación con su contraparte anglosajona. La reciente publicación del conjunto de datos \textsc{MessIRve}, con sus 700,000 consultas extraídas de intenciones de búsqueda reales a través de la API de autocompletado de Google, proporciona un marco de referencia estandarizado para evaluar modelos de recuperación en lengua española. Aunque el estudio original estableció líneas base sólidas utilizando modelos semánticos y léxicos, comerciales y abiertos, existe una área de oportunidad poco explorada en la literatura en español: la fusión de rangos (\textit{rank fusion}).
+	
+	La presente tesis se centra, por tanto, en la aplicación y evaluación matemática de algoritmos de reordenamiento (\textit{reranking}) que integran los resultados de sistemas de recuperación base léxicos y semánticos. La premisa central es que, mediante métodos de fusión de rangos como \textit{Reciprocal Rank Fusion} (RRF), el Método de Borda o el Método de Condorcet, es posible mejorar la precisión del sistema final sin el costo computacional de entrenar nuevos modelos desde cero. Este trabajo investiga si la fusión de modelos \textit{Open Source} puede igualar o superar los resultados reportados sobre el conjunto de datos \textsc{MessIRve}, ofreciendo una solución eficiente y accesible para la recuperación de información en español.
+	
+	Haciendo uso de una metodología experimental cuantitativa, compararemos sistemas híbridos que usan algoritmos de fusión de rangos para combinar listas de candidatos generadas por modelos léxicos y semánticos, y utilizaremos métricas estándar ---nDCG@10 y Recall@100--- para analizar la efectividad de estas combinaciones y comparar los resultados obtenidos con los reportados en la literatura.
+	
+	\section{Objetivos}\label{sec:objetivos}
+	\begin{itemize}
+		\item \textbf{Objetivo general}
+		\begin{quote}
+			Evaluar y comparar la eficacia de algoritmos de fusión de rangos (\textit{Rank Fusion}) ---específicamente métodos basados en puntuación (\textit{Reciprocal Rank Fusion} y Método de Borda) y métodos basados en grafos (Condorcet)--- aplicados a la combinación de resultados recuperados por modelos \textit{Open Source} léxicos (BM25) y semánticos de vanguardia (\textit{Dense/Sparse Embeddings}), utilizando el conjunto de datos \textsc{MessIRve}, con el fin de determinar si la hibridación mejora la relevancia en la recuperación de información en lengua española y si el desempeño de los modelos fusionados de código abierto puede igualar o superar al de modelos propietarios de referencia.
+		\end{quote}
+		
+		\item \textbf{Objetivos Específicos}
+		\begin{enumerate}
+			\item Fundamentar matemáticamente los métodos de representación vectorial (\textit{Embeddings}, \textit{Dual-Encoders}, \textit{Cross-Encoders}, modelos híbridos y de interacción tardía), los modelos léxicos (BM25) y los algoritmos de fusión de rangos (\textit{Reciprocal Rank Fusion}, Método de Borda y Método de Condorcet).
+			
+			\item Implementar un sistema de recuperación base utilizando herramientas y modelos \textit{Open Source} léxicos y semánticos sobre el conjunto de datos \textsc{MessIRve}.
+			
+			\item Diseñar y ejecutar experimentos que evalúen la fusión de rangos combinando listas de candidatos generadas por los modelos individuales mediante tres algoritmos: \textit{Reciprocal Rank Fusion} (RRF), Método de Borda y Método de Condorcet.
+			
+			\item Comparar el rendimiento de los métodos de Borda y Condorcet frente al estándar \textit{Reciprocal Rank Fusion} para determinar si ofrecen un desempeño superior en la recuperación de información en lengua española.
+			
+			\item Contrastar el rendimiento de los sistemas híbridos de fusión de rangos implementados con modelos \textit{Open Source} frente a las líneas base de modelos propietarios (como \texttt{text}-\texttt{embedding}-\texttt{3}-\texttt{large} de OpenAI reportado en el \textit{paper} de \textsc{MessIRve}) utilizando métricas estándar como $nDCG@10$ y $Recall@100$.
+			
+			\item Analizar la complementariedad entre los modelos léxicos y semánticos en español e identificar en qué condiciones la fusión de rangos aporta mejoras significativas y en cuáles no.
+		\end{enumerate}
+		
+	\end{itemize}
+	
+	\section{Índice tentativo}\label{sec:índice}
+	
+	\begin{enumerate}
+		\item Resumen
+		
+		\item Introducción
+		\begin{enumerate}
+			\item Motivación
+			\item Objetivos
+			\item Hipótesis
+			\item Preguntas de investigación
+			\item Contribución
+			\item Organización de la tesis
+		\end{enumerate}
+		
+		\item Marco teórico
+		\begin{enumerate}
+			\item Fundamentos de recuperación de información
+			
+			\item Modelos de recuperación
+			\begin{enumerate}
+				\item Modelos léxicos
+				\item Modelos basados en \textit{embeddings}
+				\begin{enumerate}
+					\item \textit{Dual--encoders}
+					
+					\item \textit{Cross--encoders}
+					
+					\item Modelos híbridos
+					
+					\item Modelos de interacción tardía
+				\end{enumerate}
+			\end{enumerate}
+			
+			\item Fundamentos de la fusión de rangos
+			
+			\item Evaluación en recuperación de información
+			
+			\item Estructura de \textit{benchmarks} para \textit{IR}
+			
+			\item Entrenamiento y adaptación de modelos
+			
+			\item Resumen
+		\end{enumerate}
+		
+		\item Estado del arte
+		\begin{enumerate}
+			\item Modelos de recuperación
+			\begin{enumerate}
+				\item Modelos léxicos
+				
+				\item Modelos basados en \textit{embeddings}
+				\begin{enumerate}
+					\item \textit{Dual--encoders}
+					
+					\item \textit{Cross--encoders}
+					
+					\item Modelos híbridos
+					
+					\item Modelos de interacción tardía
+				\end{enumerate}
+				
+				\item \textit{Modelos de interacción tardía}
+			\end{enumerate}
+			
+			\item Estrategias de \textit{reranking} y fusión
+			
+			\item  \textit{Benchmarks} para \textit{IR} multilingües
+			
+			\item \textit{IR} en español
+			\begin{enumerate}
+				\item \textit{Benchmarks} para \textit{IR} en español
+				
+				\item Problemas específicos del español
+			\end{enumerate}
+		\end{enumerate}
+		
+		\item Metodología propuesta
+		\begin{enumerate}
+			\item El conjunto de datos \textsc{MessIRve}
+			
+			\item Arquitectura del sistema de recuperación
+			
+			\item Modelos de recuperación base
+			
+			\item Algoritmos de fusión
+			
+			\item Diseño experimental
+			\begin{enumerate}
+				\item Experimento 1: fusión \textit{vs.} modelos individuales
+				
+				\item Experimento 2: comparación de algoritmos de fusión
+				
+				\item Experimento 3: modelos abiertos \textit{vs.} propietarios
+			\end{enumerate}
+		\end{enumerate}
+		
+		\item Resultados experimentales
+		
+		\item Conclusiones y trabajo futuro
+		
+		\item Bibliografía
+		
+		\item Apéndices
+	\end{enumerate}
+	
+	
+	% Bibliografía
+	\nocite{*}
+	\printbibliography
+	
+	
+	
+	% Visto bueno
+	\newpage
+	\vfill
+	\Large{Vo. Bo.}
+	\\    \\    \\    \\    \\  \\    \\    \\    \\    \\   
+	
+	\begin{tabular}{@{}p{6cm}p{7cm}@{}}
+		\Large{Firma del Alumno:} & \hrulefill \\
+		& \large{Jorge Esteban Mendoza Ortiz} \par \\
+		\\    \\    \\    \\    \\    
+		\Large{Directora de tesis:} & \hrulefill \\
+		& \large{Dra. Helena Gómez Adorno} \\
+		\Large{} & \\
+		& \large{Investigadora Titular A} \\
+		\Large{} &  \\
+		& \large{IIMAS-UNAM} \\
+		
+	\end{tabular}
+	
+	
+\end{document}

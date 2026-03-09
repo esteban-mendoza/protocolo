@@ -1,0 +1,14 @@
+[0] Config.pm:328> INFO - This is Biber 2.21
+[0] Config.pm:331> INFO - Logfile is 'protocolo.blg'
+[104] biber-darwin:342> INFO - === Wed Feb 18, 2026, 01:31:37
+[123] Biber.pm:421> INFO - Reading 'protocolo.bcf'
+[246] Biber.pm:999> INFO - Using all citekeys in bib section 0
+[267] Biber.pm:4487> INFO - Processing section 0
+[279] Biber.pm:4678> INFO - Looking for bibtex file 'protocolo.bib' for section 0
+[282] bibtex.pm:1713> INFO - LaTeX decoding ...
+[326] bibtex.pm:1519> INFO - Found BibTeX data source 'protocolo.bib'
+[636] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[636] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'variable = shifted' with 'variable = non-ignorable'
+[636] Biber.pm:4307> INFO - Sorting list 'nyt/global//global/global/global' of type 'entry' with template 'nyt' and locale 'es-ES'
+[678] bbl.pm:676> INFO - Writing 'protocolo.bbl' with encoding 'UTF-8'
+[731] bbl.pm:779> INFO - Output to protocolo.bbl

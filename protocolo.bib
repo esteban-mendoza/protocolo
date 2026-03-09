@@ -1,0 +1,323 @@
+@Comment{jabref-meta: databaseType:bibtex;}
+
+% Datasets
+@inproceedings{valentini-etal-2025-messirve,
+	title = "{M}ess{IR}ve: A Large-Scale {S}panish Information Retrieval Dataset",
+	author = "Valentini, Francisco  and
+	Cotik, Viviana  and
+	Furman, Dami{\'a}n  and
+	Bercovich, Ivan  and
+	Altszyler, Edgar  and
+	P{\'e}rez, Juan Manuel",
+	editor = "Christodoulopoulos, Christos  and
+	Chakraborty, Tanmoy  and
+	Rose, Carolyn  and
+	Peng, Violet",
+	booktitle = "Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing",
+	month = nov,
+	year = "2025",
+	address = "Suzhou, China",
+	publisher = "Association for Computational Linguistics",
+	url = "https://aclanthology.org/2025.emnlp-main.1412/",
+	doi = "10.18653/v1/2025.emnlp-main.1412",
+	pages = "27752--27769",
+	ISBN = "979-8-89176-332-6",
+	abstract = "Information retrieval (IR) is the task of finding relevant documents in response to a user query. Although Spanish is the second most spoken native language, there are few Spanish IR datasets, which limits the development of information access tools for Spanish speakers. We introduce MessIRve, a large-scale Spanish IR dataset with almost 700,000 queries from Google{'}s autocomplete API and relevant documents sourced from Wikipedia. MessIRve{'}s queries reflect diverse Spanish-speaking regions, unlike other datasets that are translated from English or do not consider dialectal variations. The large size of the dataset allows it to cover a wide variety of topics, unlike smaller datasets. We provide a comprehensive description of the dataset, comparisons with existing datasets, and baseline evaluations of prominent IR models. Our contributions aim to advance Spanish IR research and improve information access for Spanish speakers."
+}
+
+@inproceedings{grandury-etal-2025-la,
+    title = "La Leaderboard: A Large Language Model Leaderboard for {S}panish Varieties and Languages of {S}pain and {L}atin {A}merica",
+    author = "Grandury, Mar{\'i}a  and
+      Aula-Blasco, Javier  and
+      Falc{\~a}o, J{\'u}lia  and
+      Fourrier, Cl{\'e}mentine  and
+      Saiz, Miguel Gonz{\'a}lez  and
+      Mart{\'i}nez, Gonzalo  and
+      Gomez, Gonzalo Santamaria  and
+      Agerri, Rodrigo  and
+      Garc{\'i}a, Nuria Aldama  and
+      Chiruzzo, Luis  and
+      Conde, Javier  and
+      Gomez Adorno, Helena  and
+      Nieto, Marta Guerrero  and
+      Ivetta, Guido  and
+      Fuertes, Nat{\`a}lia L{\'o}pez  and
+      Plaza-del-Arco, Flor Miriam  and
+      Mart{\'i}n-Valdivia, Mar{\'i}a-Teresa  and
+      Zamorano, Helena Montoro  and
+      Sanz, Carmen Mu{\~n}oz  and
+      Reviriego, Pedro  and
+      Plaza, Leire Rosado  and
+      Vaca Serrano, Alejandro  and
+      Vallecillo-Rodr{\'i}guez, Estrella  and
+      Vallego, Jorge  and
+      Zubiaga, Irune",
+    editor = "Che, Wanxiang  and
+      Nabende, Joyce  and
+      Shutova, Ekaterina  and
+      Pilehvar, Mohammad Taher",
+    booktitle = "Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
+    month = jul,
+    year = "2025",
+    address = "Vienna, Austria",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2025.acl-long.1561/",
+    doi = "10.18653/v1/2025.acl-long.1561",
+    pages = "32482--32524",
+    ISBN = "979-8-89176-251-0",
+    abstract = "Leaderboards showcase the current capabilities and limitations of Large Language Models (LLMs). To motivate the development of LLMs that represent the linguistic and cultural diversity of the Spanish-speaking community, we present La Leaderboard, the first open-source leaderboard to evaluate generative LLMs in languages and language varieties of Spain and Latin America. La Leaderboard is a community-driven project that aims to establish an evaluation standard for everyone interested in developing LLMs for the Spanish-speaking community. This initial version combines 66 datasets in Catalan, Basque, Galician, and different Spanish varieties, showcasing the evaluation results of 50 models. To encourage community-driven development of leaderboards in other languages, we explain our methodology, including guidance on selecting the most suitable evaluation setup for each downstream task. In particular, we provide a rationale for using fewer few-shot examples than typically found in the literature, aiming to reduce environmental impact and facilitate access to reproducible results for a broader research community."
+}
+
+% Rerankers
+@inproceedings{10.1145/1571941.1572114,
+    author = {Cormack, Gordon V. and Clarke, Charles L A and Buettcher, Stefan},
+    title = {Reciprocal rank fusion outperforms condorcet and individual rank learning methods},
+    year = {2009},
+    isbn = {9781605584836},
+    publisher = {Association for Computing Machinery},
+    address = {New York, NY, USA},
+    url = {https://doi.org/10.1145/1571941.1572114},
+    doi = {10.1145/1571941.1572114},
+    abstract = {Reciprocal Rank Fusion (RRF), a simple method for combining the document rankings from multiple IR systems, consistently yields better results than any individual system, and better results than the standard method Condorcet Fuse. This result is demonstrated by using RRF to combine the results of several TREC experiments, and to build a meta-learner that ranks the LETOR 3 dataset better than any previously reported method},
+    booktitle = {Proceedings of the 32nd International ACM SIGIR Conference on Research and Development in Information Retrieval},
+    pages = {758–759},
+    numpages = {2},
+    keywords = {ranking, fusion, aggregation},
+    location = {Boston, MA, USA},
+    series = {SIGIR '09}
+}
+
+@inproceedings{10.1145/383952.384007,
+    author = {Aslam, Javed A. and Montague, Mark},
+    title = {Models for metasearch},
+    year = {2001},
+    isbn = {1581133316},
+    publisher = {Association for Computing Machinery},
+    address = {New York, NY, USA},
+    url = {https://doi.org/10.1145/383952.384007},
+    doi = {10.1145/383952.384007},
+    abstract = {Given the ranked lists of documents returned by multiple search engines in response to a given query, the problem ofmetasearchis to combine these lists in a way which optimizes the performance of the combination.  This paper makes three contributions to the problem of metasearch: (1) We describe and investigate a metasearch model based on an optimal democratic voting procedure, the Borda Count; (2) we describe and investigate a metasearch model based on Bayesian inference; and (3) we describe and investigate a model for obtaining upper bounds on the performance of metasearch algorithms. Our experimental results show that metasearch algorithms based on the Borda and Bayesian models usually outperform the best input system and are competitive with, and often outperform, existing metasearch strategies.  Finally, our initial upper bounds demonstrate that there is much to learn about the limits of the performance of metasearch.},
+    booktitle = {Proceedings of the 24th Annual International ACM SIGIR Conference on Research and Development in Information Retrieval},
+    pages = {276–284},
+    numpages = {9},
+    location = {New Orleans, Louisiana, USA},
+    series = {SIGIR '01}
+}
+
+@inproceedings{10.1145/584792.584881,
+    author = {Montague, Mark and Aslam, Javed A.},
+    title = {Condorcet fusion for improved retrieval},
+    year = {2002},
+    isbn = {1581134924},
+    publisher = {Association for Computing Machinery},
+    address = {New York, NY, USA},
+    url = {https://doi.org/10.1145/584792.584881},
+    doi = {10.1145/584792.584881},
+    abstract = {We present a new algorithm for improving retrieval results by combining document ranking functions: Condorcet-fuse. Beginning with one of the two major classes of voting procedures from Social Choice Theory, the Condorcet procedure, we apply a graph-theoretic analysis that yields a sorting-based algorithm that is elegant, efficient, and effective. The algorithm performs very well on TREC data, often outperforming existing metasearch algorithms whether or not relevance scores and training data is available. Condorcet-fuse significantly outperforms Borda-fuse, the analogous representative from the other major class of voting algorithms.},
+    booktitle = {Proceedings of the Eleventh International Conference on Information and Knowledge Management},
+    pages = {538–548},
+    numpages = {11},
+    location = {McLean, Virginia, USA},
+    series = {CIKM '02}
+}
+
+% Léxicos
+@article{10.1561/1500000019,
+    author = {Robertson, Stephen and Zaragoza, Hugo},
+    title = {The Probabilistic Relevance Framework: BM25 and Beyond},
+    year = {2009},
+    issue_date = {April 2009},
+    publisher = {Now Publishers Inc.},
+    address = {Hanover, MA, USA},
+    volume = {3},
+    number = {4},
+    issn = {1554-0669},
+    url = {https://doi.org/10.1561/1500000019},
+    doi = {10.1561/1500000019},
+    abstract = {The Probabilistic Relevance Framework (PRF) is a formal framework for document retrieval, grounded in work done in the 1970—1980s, which led to the development of one of the most successful text-retrieval algorithms, BM25. In recent years, research in the PRF has yielded new retrieval models capable of taking into account document meta-data (especially structure and link-graph information). Again, this has led to one of the most successful Web-search and corporate-search algorithms, BM25F. This work presents the PRF from a conceptual point of view, describing the probabilistic modelling assumptions behind the framework and the different ranking algorithms that result from its application: the binary independence model, relevance feedback models, BM25 and BM25F. It also discusses the relation between the PRF and other statistical models for IR, and covers some related topics, such as the use of non-textual features, and parameter optimisation for models with free parameters.},
+    journal = {Found. Trends Inf. Retr.},
+    month = apr,
+    pages = {333–389},
+    numpages = {57}
+}
+
+% Dual-encoders
+@misc{zhang2025qwen3embeddingadvancingtext,
+      title={Qwen3 Embedding: Advancing Text Embedding and Reranking Through Foundation Models}, 
+      author={Yanzhao Zhang and Mingxin Li and Dingkun Long and Xin Zhang and Huan Lin and Baosong Yang and Pengjun Xie and An Yang and Dayiheng Liu and Junyang Lin and Fei Huang and Jingren Zhou},
+      year={2025},
+      eprint={2506.05176},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2506.05176}, 
+}
+
+@inproceedings{chen-etal-2024-m3,
+    title = "{B}GE {M}3-Embedding: Multi-Linguality, Multi-Functionality, Multi-Granularity Text Embeddings Through Self-Knowledge Distillation",
+    author = "Chen, Jianlyu  and
+      Xiao, Shitao  and
+      Zhang, Peitian  and
+      Luo, Kun  and
+      Lian, Defu  and
+      Liu, Zheng",
+    editor = "Ku, Lun-Wei  and
+      Martins, Andre  and
+      Srikumar, Vivek",
+    booktitle = "Findings of the Association for Computational Linguistics: ACL 2024",
+    month = aug,
+    year = "2024",
+    address = "Bangkok, Thailand",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2024.findings-acl.137/",
+    doi = "10.18653/v1/2024.findings-acl.137",
+    pages = "2318--2335",
+    abstract = "In this paper, we introduce a new embedding model called M3-Embedding, which is distinguished for its versatility in Multi-Linguality, Multi-Functionality, and Multi-Granularity. It provides a uniform support for the semantic retrieval of more than 100 working languages. It can simultaneously accomplish the three common retrieval functionalities: dense retrieval, multi-vector retrieval, and sparse retrieval. Besides, it is also capable of processing inputs of different granularities, spanning from short sentences to long documents of up to 8,192 tokens. The effective training of M3-Embedding presents a series of technical contributions. Notably, we propose a novel self-knowledge distillation approach, where the relevance scores from different retrieval functionalities can be integrated as the teacher signal to enhance the training quality. We also optimize the batching strategy, which enables a large batch size and high training throughput to improve the discriminativeness of embeddings. M3-Embedding exhibits a superior performance in our experiment, leading to new state-of-the-art results on multilingual, cross-lingual, and long-document retrieval benchmarks."
+}
+
+@misc{wang2024multilinguale5textembeddings,
+      title={Multilingual E5 Text Embeddings: A Technical Report}, 
+      author={Liang Wang and Nan Yang and Xiaolong Huang and Linjun Yang and Rangan Majumder and Furu Wei},
+      year={2024},
+      eprint={2402.05672},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2402.05672}, 
+}
+
+
+% Dispersos
+@inproceedings{10.1145/3404835.3463098,
+    author = {Formal, Thibault and Piwowarski, Benjamin and Clinchant, St\'{e}phane},
+    title = {SPLADE: Sparse Lexical and Expansion Model for First Stage Ranking},
+    year = {2021},
+    isbn = {9781450380379},
+    publisher = {Association for Computing Machinery},
+    address = {New York, NY, USA},
+    url = {https://doi.org/10.1145/3404835.3463098},
+    doi = {10.1145/3404835.3463098},
+    abstract = {In neural Information Retrieval, ongoing research is directed towards improving the first retriever in ranking pipelines. Learning dense embeddings to conduct retrieval using efficient approximate nearest neighbors methods has proven to work well. Meanwhile, there has been a growing interest in learning sparse representations for documents and queries, that could inherit from the desirable properties of bag-of-words models such as the exact matching of terms and the efficiency of inverted indexes. In this work, we present a new first-stage ranker based on explicit sparsity regularization and a log-saturation effect on term weights, leading to highly sparse representations and competitive results with respect to state-of-the-art dense and sparse methods. Our approach is simple, trained end-to-end in a single stage. We also explore the trade-off between effectiveness and efficiency, by controlling the contribution of the sparsity regularization.},
+    booktitle = {Proceedings of the 44th International ACM SIGIR Conference on Research and Development in Information Retrieval},
+    pages = {2288–2292},
+    numpages = {5},
+    keywords = {indexing, neural networks, regularization, sparse representations},
+    location = {Virtual Event, Canada},
+    series = {SIGIR '21}
+}
+
+@misc{lassance2024spladev3newbaselinessplade,
+      title={SPLADE-v3: New baselines for SPLADE}, 
+      author={Carlos Lassance and Hervé Déjean and Thibault Formal and Stéphane Clinchant},
+      year={2024},
+      eprint={2403.06789},
+      archivePrefix={arXiv},
+      primaryClass={cs.IR},
+      url={https://arxiv.org/abs/2403.06789}, 
+}
+
+% Interacción tardía
+@inproceedings{10.1145/3397271.3401075,
+    author = {Khattab, Omar and Zaharia, Matei},
+    title = {ColBERT: Efficient and Effective Passage Search via Contextualized Late Interaction over BERT},
+    year = {2020},
+    isbn = {9781450380164},
+    publisher = {Association for Computing Machinery},
+    address = {New York, NY, USA},
+    url = {https://doi.org/10.1145/3397271.3401075},
+    doi = {10.1145/3397271.3401075},
+    abstract = {Recent progress in Natural Language Understanding (NLU) is driving fast-paced advances in Information Retrieval (IR), largely owed to fine-tuning deep language models (LMs) for document ranking. While remarkably effective, the ranking models based on these LMs increase computational cost by orders of magnitude over prior approaches, particularly as they must feed each query-document pair through a massive neural network to compute a single relevance score. To tackle this, we present ColBERT, a novel ranking model that adapts deep LMs (in particular, BERT) for efficient retrieval. ColBERT introduces a late interaction architecture that independently encodes the query and the document using BERT and then employs a cheap yet powerful interaction step that models their fine-grained similarity. By delaying and yet retaining this fine-granular interaction, ColBERT can leverage the expressiveness of deep LMs while simultaneously gaining the ability to pre-compute document representations offline, considerably speeding up query processing. Crucially, ColBERT's pruning-friendly interaction mechanism enables leveraging vector-similarity indexes for end-to-end retrieval directly from millions of documents. We extensively evaluate ColBERT using two recent passage search datasets. Results show that ColBERT's effectiveness is competitive with existing BERT-based models (and outperforms every non-BERT baseline), while executing two orders-of-magnitude faster and requiring up to four orders-of-magnitude fewer FLOPs per query.},
+    booktitle = {Proceedings of the 43rd International ACM SIGIR Conference on Research and Development in Information Retrieval},
+    pages = {39–48},
+    numpages = {10},
+    keywords = {neural ir, efficiency, deep language models, bert},
+    location = {Virtual Event, China},
+    series = {SIGIR '20}
+}
+
+@inproceedings{xiao-etal-2024-jina,
+    title = "{J}ina-{C}ol{BERT}-v2: A General-Purpose Multilingual Late Interaction Retriever",
+    author = {Jha, Rohan  and
+      Wang, Bo  and
+      G{\"u}nther, Michael  and
+      Mastrapas, Georgios  and
+      Sturua, Saba  and
+      Mohr, Isabelle  and
+      Koukounas, Andreas  and
+      Akram, Mohammad Kalim  and
+      Wang, Nan  and
+      Xiao, Han},
+    editor = {S{\"a}lev{\"a}, Jonne  and
+      Owodunni, Abraham},
+    booktitle = "Proceedings of the Fourth Workshop on Multilingual Representation Learning (MRL 2024)",
+    month = nov,
+    year = "2024",
+    address = "Miami, Florida, USA",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2024.mrl-1.11/",
+    doi = "10.18653/v1/2024.mrl-1.11",
+    pages = "159--166",
+    abstract = "Multi-vector dense models, such as ColBERT, have proven highly effective in information retrieval. ColBERT{'}s late interaction scoring approximates the joint query-document attention seen in cross-encoders while maintaining inference efficiency closer to traditional dense retrieval models, thanks to its bi-encoder architecture and recent optimizations in indexing and search. In this paper, we introduce a novel architecture and a training framework to support long context window and multilingual retrieval. Leveraging Matryoshka Representation Loss, we further demonstrate that the reducing the embedding dimensionality from 128 to 64 has insignificant impact on the model{'}s retrieval performance and cut storage requirements by up to 50{\%}. Our new model, Jina-ColBERT-v2, demonstrates strong performance across a range of English and multilingual retrieval tasks,"
+}
+
+% Cross-encoders
+@misc{liu2025llama2vecunsupervisedadaptationlarge,
+      title={Llama2Vec: Unsupervised Adaptation of Large Language Models for Dense Retrieval}, 
+      author={Zheng Liu and Chaofan Li and Shitao Xiao and Yingxia Shao and Defu Lian},
+      year={2025},
+      eprint={2312.15503},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2312.15503}, 
+}
+
+@misc{wang2025jinarerankerv3lateinteractionlistwise,
+      title={jina-reranker-v3: Last but Not Late Interaction for Listwise Document Reranking}, 
+      author={Feng Wang and Yuqing Li and Han Xiao},
+      year={2025},
+      eprint={2509.25085},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2509.25085}, 
+}
+
+
+% Herramientas
+@inproceedings{10.1145/3511808.3557207,
+    author = {Bassani, Elias and Romelli, Luca},
+    title = {ranx.fuse: A Python Library for Metasearch},
+    year = {2022},
+    isbn = {9781450392365},
+    publisher = {Association for Computing Machinery},
+    address = {New York, NY, USA},
+    url = {https://doi.org/10.1145/3511808.3557207},
+    doi = {10.1145/3511808.3557207},
+    abstract = {This paper presents ranx.fuse, a Python library for Metasearch. Built following a user-centered design, it provides easy-to-use tools for combining the results of multiple search engines. ranx.fuse comprises 25 Metasearch algorithms implemented with Numba, a just-in-time compiler for Python code, for efficient vector operations and automatic parallelization. Moreover, in conjunction with the Metasearch algorithms, our library implements six normalization strategies that transform the search engines' result lists to make them comparable, a mandatory step for Metasearch. Finally, as many Metasearch algorithms require a training or optimization step, ranx.fuse offers a convenient functionality for their optimization that evaluates pre-defined hyper-parameters configurations via grid search. By relying on the provided functions, the user can optimally combine the results of multiple search engines in very few lines of code. ranx.fuse can also serve as a user-friendly tool for fusing the rankings computed by a first-stage retriever and a re-ranker, as a library providing several baselines for Metasearch, and as a playground to test novel normalization strategies.},
+    booktitle = {Proceedings of the 31st ACM International Conference on Information \& Knowledge Management},
+    pages = {4808–4812},
+    numpages = {5},
+    keywords = {tool, metasearch, information retrieval, fusion},
+    location = {Atlanta, GA, USA},
+    series = {CIKM '22}
+}
+
+@inproceedings{reimers-2019-sentence-bert,
+    title = "Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks",
+    author = "Reimers, Nils and Gurevych, Iryna",
+    booktitle = "Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing",
+    month = "11",
+    year = "2019",
+    publisher = "Association for Computational Linguistics",
+    url = "https://arxiv.org/abs/1908.10084",
+}
+
+@INPROCEEDINGS{Lin_etal_SIGIR2021_Pyserini,
+   author = "Jimmy Lin and Xueguang Ma and Sheng-Chieh Lin and Jheng-Hong Yang and Ronak Pradeep and Rodrigo Nogueira",
+   title = "{Pyserini}: A {Python} Toolkit for Reproducible Information Retrieval Research with Sparse and Dense Representations",
+   booktitle = "Proceedings of the 44th Annual International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR 2021)",
+   year = 2021,
+   pages = "2356--2362",
+}
+
+
+
+
+%------------------------------------Fin----------------------------------------------------------------
