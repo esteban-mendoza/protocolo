@@ -17,6 +17,7 @@
 \usepackage{amsthm}
 \usepackage{bbm}
 \usepackage{xcolor}
+\usepackage[most]{tcolorbox}
 \allowdisplaybreaks
 
 % Formato
@@ -52,9 +53,19 @@
     
     En el contexto de la lengua española, la investigación en IR ha estado históricamente rezagada en comparación con su contraparte anglosajona. La reciente publicación del conjunto de datos \textsc{MessIRve} \parencite{valentini-etal-2025-messirve}, con sus 700,000 consultas extraídas de intenciones de búsqueda reales a través de la API de autocompletado de Google, proporciona un marco de referencia estandarizado para evaluar modelos de recuperación en lengua española. Aunque el estudio original \parencite{valentini-etal-2025-messirve} estableció líneas base sólidas utilizando modelos semánticos y léxicos, comerciales y abiertos, existe una área de oportunidad poco explorada en la literatura en español: la fusión de rangos (\textit{rank fusion}).
     
-    La presente tesis se centra, por tanto, en la aplicación y evaluación matemática de algoritmos de reordenamiento (\textit{reranking}) que integran los resultados de sistemas de recuperación base léxicos y semánticos. La premisa central es que, mediante métodos de fusión de rangos como \textit{Reciprocal Rank Fusion} (RRF) \parencite{10.1145/1571941.1572114}, el Método de Borda \parencite{10.1145/383952.384007} o el Método de Condorcet \parencite{10.1145/584792.584881}, es posible mejorar la precisión del sistema final sin el costo computacional de entrenar nuevos modelos desde cero. Este trabajo investiga si la fusión de modelos \textit{Open Source} puede igualar o superar los resultados reportados sobre el conjunto de datos \textsc{MessIRve}, ofreciendo una solución eficiente y accesible para la recuperación de información en español.
+    La presente tesis se centra, por tanto, en la aplicación y evaluación matemática de algoritmos de reordenamiento (\textit{reranking}) que integran los resultados de sistemas de recuperación base léxicos y semánticos. La premisa central es que, mediante métodos de fusión de rangos como \textit{Reciprocal Rank Fusion} (RRF) \parencite{10.1145/1571941.1572114}, el Método de Borda \parencite{10.1145/383952.384007} o el Método de Condorcet \parencite{10.1145/584792.584881}, es posible mejorar la precisión del sistema final sin el costo computacional de entrenar nuevos modelos desde cero. Este trabajo investiga también si la fusión de modelos \textit{Open Source} puede igualar o superar los resultados reportados sobre el conjunto de datos \textsc{MessIRve}, ofreciendo una solución eficiente y accesible para la recuperación de información en español.
     
     Haciendo uso de una metodología experimental cuantitativa, compararemos sistemas híbridos que usan algoritmos de fusión de rangos para combinar listas de candidatos generadas por modelos léxicos y semánticos, y utilizaremos métricas estándar ---nDCG@10 y Recall@100--- para analizar la efectividad de estas combinaciones y comparar los resultados obtenidos con los reportados en la literatura.
+
+    \begin{tcolorbox}[
+      colback=yellow!30,   % background color
+      colframe=yellow!30,  % frame color (same = no visible border)
+      boxrule=0pt,
+      sharp corners,
+      left=2pt, right=2pt, top=2pt, bottom=2pt
+    ]
+    Haciendo uso de una metodología experimental cuantitativa, compararemos sistemas híbridos que usan algoritmos de fusión de rangos para combinar listas de candidatos generadas por modelos léxicos y semánticos. Para evaluar la efectividad de estas combinaciones, la metodología adoptará como métricas principales nDCG@10 y Recall@100. La elección de estos valores específicos de $k$ está fundamentada en la necesidad de replicar el entorno de evaluación del artículo original de \textsc{MessIRve} \parencite{valentini-etal-2025-messirve}, garantizando así una comparación uno a uno metodológicamente válida contra las líneas base del estado del arte. Adicionalmente, el análisis se extenderá utilizando métricas de Precision@k y Recall@k para distintos órdenes de magnitud ($k \in \{10,50,1000\}$) con el fin de observar el comportamiento del decaimiento de la precisión, así como el \textit{Mean Reciprocal Rank} (MRR@10) para evaluar la utilidad estricta del primer resultado recuperado.
+    \end{tcolorbox}
     
     \section{Objetivos}\label{sec:objetivos}
     \begin{itemize}
