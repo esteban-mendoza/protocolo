@@ -57,7 +57,7 @@
     
     \maketitle
     
-    \section{Introducción}\label{sec:introduccion}
+    \section{Justificación}\label{sec:justificacion}
     
     \noindent La recuperación de información (IR por sus siglas en inglés) constituye uno de los problemas fundamentales en la ciencia de datos y computación matemática modernas, siendo la base de sistemas críticos que van desde motores de búsqueda comerciales hasta los sistemas de Generación Aumentada por Recuperación (RAG por sus siglas en inglés). El problema de IR, como lo planteamos aquí, consiste en obtener un subconjunto relevante de documentos de un corpus más grande dada una consulta expresada en lenguaje natural. Históricamente este problema se ha abordado utilizando modelos probabilísticos y de coincidencia léxica \parencite{manning2009introduction}, con el algoritmo BM25 \parencite{10.1561/1500000019} estableciéndose actualmente como un estándar. No obstante, dado que los modelos como BM25 requieren coincidencia exacta entre los términos de las consultas y los documentos, a menudo fallan en capturar relaciones semánticas y contextuales. Esta limitación se acentúa en lenguas morfológicamente ricas como el español, en el que fenómenos como la flexión verbal, derivación y variaciones de género y número generan múltiples formas para un mismo lema, reduciendo la probabilidad de coincidencia exacta de términos.
     
@@ -69,10 +69,7 @@
     
     Haciendo uso de una metodología experimental cuantitativa, compararemos sistemas híbridos que usan algoritmos de fusión de rangos para combinar listas de candidatos generadas por modelos léxicos y semánticos, y utilizaremos métricas estándar ---nDCG@10 y Recall@100--- para analizar la efectividad de estas combinaciones y comparar los resultados obtenidos con los reportados en la literatura.
     
-    % ── Highlighted paragraph ──
-    \begin{tcolorbox}[myhighlight]
     Haciendo uso de una metodología experimental cuantitativa, compararemos sistemas híbridos que usan algoritmos de fusión de rangos para combinar listas de candidatos generadas por modelos léxicos y semánticos. Para evaluar la efectividad de estas combinaciones, la metodología adoptará como métricas principales nDCG@10 y Recall@100. La elección de estos valores específicos de $k$ está fundamentada en la necesidad de replicar el entorno de evaluación del artículo original de \textsc{MessIRve} \parencite{valentini-etal-2025-messirve}, garantizando así una comparación uno a uno metodológicamente válida contra las líneas base del estado del arte. Adicionalmente, el análisis se extenderá utilizando métricas de Precision@k y Recall@k para distintos órdenes de magnitud ($k \in \{10,50,1000\}$) con el fin de observar el comportamiento del decaimiento de la precisión, así como el \textit{Mean Reciprocal Rank} (MRR@10) para evaluar la utilidad estricta del primer resultado recuperado.
-    \end{tcolorbox}
 
     
     \section{Objetivos}\label{sec:objetivos}
@@ -85,9 +82,7 @@
         \item \textbf{Objetivos Específicos}
         \begin{enumerate}
             % ── Highlighted single enumerated item ──
-            \item \begin{tcolorbox}[myhighlight, nobeforeafter]
-                      Fundamentar matemáticamente los métodos de representación vectorial (\textit{Embeddings}, \textit{Dual-Encoders}, \textit{Cross-Encoders}, modelos híbridos y de interacción tardía), los modelos léxicos (BM25) y los algoritmos de fusión de rangos (\textit{Reciprocal Rank Fusion}, Método de Borda y Método de Condorcet).
-                  \end{tcolorbox}
+            \item  Fundamentar matemáticamente los métodos de representación vectorial (\textit{Embeddings}, \textit{Dual-Encoders}, \textit{Cross-Encoders}, modelos híbridos y de interacción tardía), los modelos léxicos (BM25) y los algoritmos de fusión de rangos (\textit{Reciprocal Rank Fusion}, Método de Borda y Método de Condorcet).
             
             \item Implementar un sistema de recuperación base utilizando herramientas y modelos \textit{Open Source} léxicos y semánticos sobre el conjunto de datos \textsc{MessIRve}.
             
