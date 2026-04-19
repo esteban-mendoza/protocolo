@@ -59,23 +59,26 @@
     
     \section{Justificación}\label{sec:justificacion}
     
-    \noindent La recuperación de información (IR por sus siglas en inglés) constituye uno de los problemas fundamentales en la ciencia de datos y computación matemática modernas, siendo la base de sistemas críticos que van desde motores de búsqueda comerciales hasta los sistemas de Generación Aumentada por Recuperación (RAG por sus siglas en inglés). El problema de IR, como lo planteamos aquí, consiste en obtener un subconjunto relevante de documentos de un corpus más grande dada una consulta expresada en lenguaje natural. Históricamente este problema se ha abordado utilizando modelos probabilísticos y de coincidencia léxica \parencite{manning2009introduction}, con el algoritmo BM25 \parencite{10.1561/1500000019} estableciéndose actualmente como un estándar. No obstante, dado que los modelos como BM25 requieren coincidencia exacta entre los términos de las consultas y los documentos, a menudo fallan en capturar relaciones semánticas y contextuales. Esta limitación se acentúa en lenguas morfológicamente ricas como el español, en el que fenómenos como la flexión verbal, derivación y variaciones de género y número generan múltiples formas para un mismo lema, reduciendo la probabilidad de coincidencia exacta de términos.
+    \noindent La recuperación de información (IR por sus siglas en inglés) constituye uno de los problemas fundamentales en la ciencia de datos y computación matemática modernas, siendo la base de sistemas críticos que van desde motores de búsqueda comerciales hasta los sistemas de Generación Aumentada por Recuperación (RAG por sus siglas en inglés). El problema de IR, como lo planteamos aquí, consiste en obtener un subconjunto relevante de documentos de un corpus más grande dada una consulta expresada en lenguaje natural. Históricamente, este problema se ha abordado utilizando modelos probabilísticos y de coincidencia léxica \parencite{manning2009introduction}, con el algoritmo BM25 \parencite{10.1561/1500000019} estableciéndose actualmente como un estándar. No obstante, dado que los modelos como BM25 requieren coincidencia exacta entre los términos de las consultas y los documentos, a menudo fallan en capturar relaciones semánticas y contextuales. Esta limitación se acentúa en lenguas morfológicamente ricas como el español, en el que fenómenos como la flexión verbal, derivación y variaciones de género y número generan múltiples formas para un mismo lema, reduciendo la probabilidad de coincidencia exacta de términos.
     
     El aprendizaje profundo y los modelos de lenguaje basados en la arquitectura \textit{Transformer} \parencite{NIPS2017_3f5ee243} han revolucionado el campo del procesamiento de lenguaje natural, introduciendo técnicas que permiten utilizar representaciones vectoriales del texto en las que la similitud semántica se cuantifica mediante distancias geométricas. A pesar del éxito de estos modelos ---que conocemos como ``semánticos''--- en numerosas tareas, estos tienen sus propias limitaciones y fallas: tienden a perder precisión ante términos exactos o nombres propios poco frecuentes \parencite{thakur2021beirheterogenousbenchmarkzeroshot}, áreas en las que los modelos léxicos tradicionales siguen siendo superiores. Esto sugiere que los modelos léxicos y semánticos no son sustitutos ni redundantes, sino complementarios.
     
     En el contexto de la lengua española, la investigación en IR ha estado históricamente rezagada en comparación con su contraparte anglosajona. La reciente publicación del conjunto de datos \textsc{MessIRve} \parencite{valentini-etal-2025-messirve}, con sus 700,000 consultas extraídas de intenciones de búsqueda reales a través de la API de autocompletado de Google, proporciona un marco de referencia estandarizado para evaluar modelos de recuperación en lengua española. Aunque el estudio original \parencite{valentini-etal-2025-messirve} estableció líneas base sólidas utilizando modelos semánticos y léxicos, comerciales y abiertos, existe una área de oportunidad poco explorada en la literatura en español: la fusión de rangos (\textit{rank fusion}).
     
-    La presente tesis se centra, por tanto, en la aplicación y evaluación matemática de algoritmos de reordenamiento (\textit{reranking}) que integran los resultados de sistemas de recuperación base léxicos y semánticos. La premisa central es que, mediante métodos de fusión de rangos como \textit{Reciprocal Rank Fusion} (RRF) \parencite{10.1145/1571941.1572114}, el Método de Borda \parencite{10.1145/383952.384007} o el Método de Condorcet \parencite{10.1145/584792.584881}, es posible mejorar la precisión del sistema final sin el costo computacional de entrenar nuevos modelos desde cero. Este trabajo investiga también si la fusión de modelos \textit{Open Source} puede igualar o superar los resultados reportados sobre el conjunto de datos \textsc{MessIRve}, ofreciendo una solución eficiente y accesible para la recuperación de información en español.
+    La presente tesis se centra, por tanto, en la aplicación y evaluación de algoritmos de fusión de rangos como estrategia de reordenamiento (\textit{reranking}) que integra los resultados de sistemas de recuperación base léxicos y semánticos.
+    La premisa central es que, mediante métodos de fusión de rangos del estado del arte como \textit{Rank--Biased Centroids} (RBC) \parencite{rbc10.1145/3077136.3080839}, \textit{Inverse Square Rank} (ISR) \parencite{mourao2015multimodal}, \textit{Reciprocal Rank Fusion} (RRF) \parencite{10.1145/1571941.1572114}, el Método de Condorcet \parencite{10.1145/584792.584881}, \textit{BordaFuse} \parencite{10.1145/383952.384007}, o \textit{CombMNZ} \parencite{fox1994combination}, es posible mejorar la precisión del sistema final sin el costo computacional de entrenar nuevos modelos desde cero. 
+	
+	Paralelamente, han surgido modelos de reordenamiento neuronal ---como los \textit{cross-encoders} \parencite{nogueira2019passage} y los modelos de interacción tardía \parencite{colbert10.1145/3397271.3401075}--- que procesan cada par consulta-documento de manera conjunta para capturar interacciones más ricas. Dado su elevado costo computacional, estos modelos suelen aplicarse únicamente sobre una lista reducida de candidatos generada por un sistema de recuperación inicial. Los métodos de fusión de rangos ofrecen una alternativa distinta: combinan las listas de resultados de múltiples sistemas sin requerir inferencia neuronal adicional, lo que permite mejorar la relevancia a un costo marginal. Esta tesis contrasta ambas familias de estrategias de reordenamiento con el fin de determinar en qué medida la fusión de rangos constituye una alternativa competitiva frente a los modelos neuronales.
     
-    Haciendo uso de una metodología experimental cuantitativa, compararemos sistemas híbridos que usan algoritmos de fusión de rangos para combinar listas de candidatos generadas por modelos léxicos y semánticos, y utilizaremos métricas estándar ---nDCG@10 y Recall@100--- para analizar la efectividad de estas combinaciones y comparar los resultados obtenidos con los reportados en la literatura.
+    Adicionalmente, este trabajo investiga si la fusión de rangos usando modelos de código abierto puede igualar o superar el rendimiento reportado en la literatura por modelos propietarios sobre el conjunto de datos \textsc{MessIRve}, ofreciendo así una alternativa eficiente, accesible y democrática para la recuperación de información en español.
     
-	Haciendo uso de una metodología experimental cuantitativa, compararemos sistemas híbridos que usan algoritmos de fusión de rangos para combinar listas de candidatos generadas por modelos léxicos y semánticos. Para evaluar la efectividad de estas combinaciones, la metodología adoptará las siguientes métricas:
+	Mediante una metodología experimental cuantitativa, compararemos sistemas que usan algoritmos de fusión de rangos para combinar listas de candidatos generadas por modelos léxicos y semánticos. Para evaluar la efectividad de estas combinaciones, la metodología adoptará las siguientes métricas:
 	\begin{itemize}
-		\item nDCG@10 \parencite{valentini-etal-2025-messirve,muennighoff2023mteb,zhang2023miracl,thakur2021beirheterogenousbenchmarkzeroshot,craswell2020overview}, dada su capacidad para modelar relevancia graduada con descuento logarítmico por posición, lo que la convierte en el estándar dominante en los \textit{benchmarks} de recuperación modernos;
-		\item Recall@100 \parencite{valentini-etal-2025-messirve,zhang2023miracl,zhang2021mrtydi}, al ser la métrica que cuantifica la cobertura de la etapa de recuperación inicial y establece el techo de rendimiento para cualquier etapa de reordenamiento posterior;
-		\item MRR@10 \parencite{zhang2021mrtydi,nguyen2016msmarco}, para evaluar la utilidad estricta del primer documento relevante recuperado;
-		\item MAP \parencite{muennighoff2023mteb}, adoptada como métrica en la tarea de \textit{reranking} de MTEB al capturar la calidad holística del ordenamiento sobre múltiples documentos relevantes;
-		\item Precision@$k$ para $k \in \{10, 50\}$ \parencite{voorhees2021treccovid,craswell2020overview}, con el fin de analizar el decaimiento de la precisión conforme se amplía la ventana de observación.
+		\item $nDCG@10$ \parencite{valentini-etal-2025-messirve,muennighoff2023mteb,zhang2023miracl,thakur2021beirheterogenousbenchmarkzeroshot,craswell2020overview}, dada su capacidad para modelar relevancia graduada con descuento logarítmico por posición, lo que la convierte en el estándar dominante en los \textit{benchmarks} de recuperación modernos;
+		\item $Recall@100$ \parencite{valentini-etal-2025-messirve,zhang2023miracl,zhang2021mrtydi}, al ser la métrica que cuantifica la cobertura de la etapa de recuperación inicial y establece el techo de rendimiento para cualquier etapa de reordenamiento posterior;
+		\item $MRR@10$ \parencite{zhang2021mrtydi,nguyen2016msmarco}, para evaluar la utilidad estricta del primer documento relevante recuperado;
+		\item $MAP$ \parencite{muennighoff2023mteb}, adoptada como métrica en la tarea de \textit{reranking} de MTEB al capturar la calidad holística del ordenamiento sobre múltiples documentos relevantes;
+		\item $Precision@k$ para $k \in \{10, 50\}$ \parencite{voorhees2021treccovid,craswell2020overview}, con el fin de analizar el decaimiento de la precisión conforme se amplía la ventana de observación.
 	\end{itemize}
 	La elección de esta batería de métricas responde a la necesidad de garantizar comparabilidad directa con los protocolos de evaluación adoptados por los \textit{benchmarks} del estado del arte: \textsc{MessIRve} \parencite{valentini-etal-2025-messirve}, MTEB \parencite{muennighoff2023mteb}, MIRACL \parencite{zhang2023miracl}, BEIR \parencite{thakur2021beirheterogenousbenchmarkzeroshot}, Mr.\ TyDi \parencite{zhang2021mrtydi}, TREC-COVID \parencite{voorhees2021treccovid}, TREC Deep Learning \parencite{craswell2020overview} y MS MARCO \parencite{nguyen2016msmarco}, permitiendo así contrastar los resultados obtenidos con las líneas base reportadas en la literatura bajo condiciones metodológicamente equivalentes.
 	
@@ -83,20 +86,20 @@
     \begin{itemize}
         \item \textbf{Objetivo general}
         \begin{quote}
-            Evaluar y comparar la eficacia de algoritmos de fusión de rangos (\textit{Rank Fusion}) ---específicamente métodos basados en puntuación (\textit{Reciprocal Rank Fusion} y Método de Borda) y métodos basados en grafos (Condorcet)--- aplicados a la combinación de resultados recuperados por modelos \textit{Open Source} léxicos (BM25) y semánticos de vanguardia (\textit{Dense/Sparse Embeddings}), utilizando el conjunto de datos \textsc{MessIRve}, con el fin de determinar si la hibridación mejora la relevancia en la recuperación de información en lengua española y si el desempeño de los modelos fusionados de código abierto puede igualar o superar al de modelos propietarios de referencia.
+        	Evaluar y comparar la eficacia de algoritmos de fusión de rangos aplicados a la combinación de resultados recuperados por modelos de código abierto léxicos (BM25) y semánticos (\textit{Dense/Sparse--Encoders}) de vanguardia en la tarea de recuperación de información en lengua española sobre el conjunto de datos \textsc{MessIRve} frente a modelos de reordenamiento neuronal como \textit{cross-encoders} y de interacción tardía, con el fin de determinar: si la fusión de rangos mejora la relevancia respecto de los modelos individuales; en qué medida la fusión de rangos constituye una alternativa competitiva frente al reordenamiento neuronal, y si los sistemas de código abierto de reordenamiento pueden igualar o superar el rendimiento de modelos propietarios de referencia.
         \end{quote}
         
         \item \textbf{Objetivos Específicos}
         \begin{enumerate}
-            \item  Fundamentar matemáticamente los métodos de representación vectorial (\textit{Embeddings}, \textit{Dual-Encoders}, \textit{Cross-Encoders}, modelos híbridos y de interacción tardía), los modelos léxicos (BM25) y los algoritmos de fusión de rangos (\textit{Reciprocal Rank Fusion}, Método de Borda y Método de Condorcet).
+            \item  Fundamentar matemáticamente los sistemas de recuperación de información que usan métodos léxicos (BM25), semánticos (\textit{Dense--Encoders}, \textit{Sparse--Encoders},  \textit{Cross-Encoders} y de interacción tardía), y los algoritmos de fusión de rangos: \textit{Rank--Biased Centroids} (RBC), \textit{Inverse Square Rank} (ISR), \textit{Reciprocal Rank Fusion} (RRF), el Método de Condorcet, \textit{BordaFuse} y \textit{CombMNZ}.
             
-            \item Implementar un sistema de recuperación base utilizando herramientas y modelos \textit{Open Source} léxicos y semánticos sobre el conjunto de datos \textsc{MessIRve}.
+            \item Implementar un sistema de recuperación base utilizando herramientas y modelos de código abierto léxicos y semánticos sobre el conjunto de datos \textsc{MessIRve}.
             
-            \item Diseñar y ejecutar experimentos que evalúen la fusión de rangos combinando listas de candidatos generadas por los modelos individuales mediante tres algoritmos: \textit{Reciprocal Rank Fusion} (RRF), Método de Borda y Método de Condorcet.
+            \item Diseñar y ejecutar experimentos que evalúen sistemáticamente las combinaciones de modelos base (léxicos y semánticos) mediante los seis algoritmos de fusión seleccionados, variando los sistemas de entrada para identificar las configuraciones óptimas.
             
-            \item Comparar el rendimiento de los métodos de Borda y Condorcet frente al estándar \textit{Reciprocal Rank Fusion} para determinar si ofrecen un desempeño superior en la recuperación de información en lengua española.
+           \item Comparar el rendimiento de los métodos de fusión de rangos frente a modelos de reordenamiento neuronal (\textit{cross-encoders} y de interacción tardía) para determinar en qué medida la fusión constituye una alternativa competitiva al reordenamiento neuronal en términos de relevancia y eficiencia computacional.
             
-            \item Contrastar el rendimiento de los sistemas híbridos de fusión de rangos implementados con modelos \textit{Open Source} frente a las líneas base de modelos propietarios (como \texttt{text}-\texttt{embedding}-\texttt{3}-\texttt{large} de OpenAI reportado en el \textit{paper} de \textsc{MessIRve}) utilizando métricas estándar como $nDCG@10$ y $Recall@100$.
+            \item Contrastar el rendimiento de los sistemas híbridos de fusión de rangos implementados con modelos de código abierto frente a las líneas base de modelos propietarios reportadas en la literatura sobre \textsc{MessIRve} (e.g., \texttt{text-embedding-3-large} de OpenAI).
             
             \item Analizar la complementariedad entre los modelos léxicos y semánticos en español e identificar en qué condiciones la fusión de rangos aporta mejoras significativas y en cuáles no.
         \end{enumerate}
@@ -125,13 +128,13 @@
             \item Modelos de recuperación
             \begin{enumerate}
                 \item Modelos léxicos
-                \item Modelos basados en \textit{embeddings}
+                \item Modelos semánticos
                 \begin{enumerate}
                     \item \textit{Dual--encoders}
                     
-                    \item \textit{Cross--encoders}
+                    \item \textit{Sparse--encoders}
                     
-                    \item Modelos híbridos
+                    \item \textit{Cross--encoders}
                     
                     \item Modelos de interacción tardía
                 \end{enumerate}
@@ -165,18 +168,16 @@
             \begin{enumerate}
                 \item Modelos léxicos
                 
-                \item Modelos basados en \textit{embeddings}
+                \item Modelos semánticos
                 \begin{enumerate}
                     \item \textit{Dual--encoders}
                     
+                    \item \textit{Sparse--encoders}
+                    
                     \item \textit{Cross--encoders}
                     
-                    \item Modelos híbridos
-                    
-                    \item Modelos de interacción tardía
+                    \item \textit{Modelos de interacción tardía}
                 \end{enumerate}
-                
-                \item \textit{Modelos de interacción tardía}
             \end{enumerate}
         \end{enumerate}
         
@@ -196,7 +197,9 @@
                 
                 \item Experimento 2: comparación de algoritmos de fusión
                 
-                \item Experimento 3: modelos abiertos \textit{vs.} propietarios
+                \item Experimento 3: algoritmos de fusión \textit{vs.} reordenamiento neuronal
+                
+                \item Experimento 4: modelos abiertos \textit{vs.} propietarios
             \end{enumerate}
         \end{enumerate}
         
@@ -220,7 +223,7 @@
     \newpage
     \vfill
     \Large{Vo. Bo.}
-    \\    \\    \\    \\    \\  \\    \\    \\    \\    \\   
+    \vspace{7cm}
     
     \begin{tabular}{@{}p{6cm}p{7cm}@{}}
         \Large{Firma del Alumno:} & \hrulefill \\
