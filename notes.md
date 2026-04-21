@@ -12,6 +12,7 @@
 
 ## Cambios
 
+- Confirmar métricas en los rankings
 - Agrega estructura aproximada del apartado matemático. Discute con la Dra
   - Marco de relevancia probabilística
   - Pearson 1901
